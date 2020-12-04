@@ -1,0 +1,25 @@
+{
+  "name": "courcevladilen",
+  "version": "1.0.0",
+  "description": "Курс Владилена Минина 2020 по продвинотому JS",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrenkiArt/vladilen-course.git"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "pureJS",
+    "VanilaJS"
+  ],
+  "author": "Arthur Shaidullin <frenki_art@mail.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FrenkiArt/vladilen-course/issues"
+  },
+  "homepage": "https://github.com/FrenkiArt/vladilen-course#readme"
+}
