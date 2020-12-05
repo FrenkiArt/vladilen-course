@@ -10,8 +10,7 @@ const isDev = !isProd;
 // console.log('Is PROD', isProd);
 // console.log('Is DEV', isDev);
 
-const filename = (ext) =>
-  isDev ? `bundle.${ext}` : `bundle.[fullhash].${ext}`;
+const filename = (ext) => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`);
 
 const jsLoaders = (ext) => {
   const loaders = [
@@ -52,8 +51,8 @@ module.exports = {
     // hotOnly: true,
     open: true,
     overlay: true,
-    // liveReload: true,
-    // compress: true,
+    liveReload: true,
+    compress: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
