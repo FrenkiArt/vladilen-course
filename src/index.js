@@ -1,4 +1,4 @@
-import './module';
+import './assets/js/module';
 import './assets/scss/index.scss';
 
 /**

@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'mixin';
+
+.exel__toolbar {
+  background-color: whitesmoke;
+  border-bottom: 1px solid $border-color;
+  padding: 7px 10px;
+  display: flex;
+  border-top: 1px solid $border-color;
+  height: $toolbar-height;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: $header-height;
+
+  .button {
+    @include button(green);
+  }
+}
