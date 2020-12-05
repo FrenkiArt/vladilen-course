@@ -14,6 +14,7 @@ function component() {
   return element;
 }
 
-document.body.appendChild(component());
+component();
+// document.body.appendChild(component());
 
 console.log('Working!');
