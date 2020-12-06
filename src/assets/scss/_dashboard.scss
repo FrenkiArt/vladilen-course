@@ -53,7 +53,8 @@
       color: green;
     }
 
-    &:active {
+    &:active,
+    &.active {
       border-color: red;
       color: red;
     }
