@@ -4,11 +4,11 @@
 .exel__toolbar {
   // background-color: whitesmoke;
   border-bottom: 1px solid $border-color;
-  padding: 7px 10px;
-  display: flex;
   border-top: 1px solid $border-color;
+  display: flex;
   height: $toolbar-height;
   left: 0;
+  padding: 7px 10px;
   position: absolute;
   right: 0;
   top: $header-height;
