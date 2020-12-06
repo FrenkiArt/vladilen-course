@@ -1,20 +1,13 @@
 import './assets/js/module';
 import './assets/scss/index.scss';
+import {Excel} from './components/excel/Exel';
+import {Header} from './components/header/Header';
+import {Toolbar} from './components/toolbar/Toolbar';
+import {Formula} from './components/formula/Formula';
+import {Table} from './components/table/Table';
 
-/**
- * It just test
- * @params {int} test - some number
- * @return {int} sum of test and 10
- */
-function component() {
-  const element = document.createElement('div');
+const excel = new Excel('#app', {
+  components: [Header, Toolbar, Formula, Table],
+});
 
-  element.innerHTML = 'Hello Arthur';
-
-  return element;
-}
-
-component();
-// document.body.appendChild(component());
-
-console.log('Working!');
+excel.render();
