@@ -1,3 +1,5 @@
+import {$} from '../../core/dom.js';
+
 /**
  * Class Excel
  * @params {int} test
@@ -19,14 +21,15 @@ export class Excel {
    * @return {$root} корневой элемент
    */
   getRoot() {
-    const $root = document.createElement('div');
-
-    console.log(this.components);
+    const $root = $.create('div', 'excel');
 
     this.components.forEach((Component) => {
-      const component = new Component();
-      console.log(component.toHTML());
-      $root.insertAdjacentHTML('beforeend', component.toHTML());
+      const $el = $.create('div', Component.className);
+      // const $el = document.createElement('div');
+      // $el.classList.add(Component.className);
+      const component = new Component($el);
+      $el.innerHTML = component.toHTML();
+      $root.append($el);
     });
 
     return $root;

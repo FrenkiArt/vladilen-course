@@ -1,6 +1,6 @@
 import './assets/js/module';
 import './assets/scss/index.scss';
-import {Excel} from './components/excel/Exel';
+import {Excel} from './components/excel/Excel';
 import {Header} from './components/header/Header';
 import {Toolbar} from './components/toolbar/Toolbar';
 import {Formula} from './components/formula/Formula';
