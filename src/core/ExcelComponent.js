@@ -7,6 +7,15 @@ import {DomListener} from './DomListener';
  */
 export class ExcelComponent extends DomListener {
   /**
+   * Непонятно опка
+   * @param {*} $root Передаётся $root
+   * @param {object} options Передаются опции в объекте
+   */
+  constructor($root, options = {}) {
+    super($root, options.listeners);
+  }
+
+  /**
    * will return template
    * Возвращает шаблон компонента
    * @params {int} test
@@ -14,5 +23,12 @@ export class ExcelComponent extends DomListener {
    */
   toHTML() {
     return '';
+  }
+
+  /**
+   * Вызывает подключение слушателей
+   */
+  init() {
+    this.initDOMListeners();
   }
 }
