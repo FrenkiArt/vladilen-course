@@ -13,6 +13,7 @@ export class ExcelComponent extends DomListener {
    */
   constructor($root, options = {}) {
     super($root, options.listeners);
+    this.name = options.name || '';
   }
 
   /**
@@ -30,5 +31,12 @@ export class ExcelComponent extends DomListener {
    */
   init() {
     this.initDOMListeners();
+  }
+
+  /**
+   * Вызывает удаление слушателей
+   */
+  destroy() {
+    this.removeDOMListeners();
   }
 }

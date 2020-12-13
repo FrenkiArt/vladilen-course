@@ -32,8 +32,21 @@ class Dom {
 
   /**
    * Будущий аналог on() у JQuery
+   * @param {*} eventType Это Эвент событие
+   * @param {*} callback Это сама функция которая выполняется
    */
-  on() {}
+  on(eventType, callback) {
+    this.$el.addEventListener(eventType, callback);
+  }
+
+  /**
+   * Будущий аналог off() у JQuery
+   * @param {*} eventType Это Эвент событие
+   * @param {*} callback Это сама функция которая выполняется
+   */
+  off(eventType, callback) {
+    this.$el.removeEventListener(eventType, callback);
+  }
 
   /**
    * @param {this.html} этот метод удаляет всё внутри элемента this
