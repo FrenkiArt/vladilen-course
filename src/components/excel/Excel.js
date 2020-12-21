@@ -29,9 +29,9 @@ export class Excel {
       // $el.classList.add(Component.className);
       const component = new Component($el);
       // DEBUG
-      if (component.name) {
+      /* if (component.name) {
         window['c' + component.name] = component;
-      }
+      } */
       // $el.innerHTML = component.toHTML();
 
       $el.html(component.toHTML());
