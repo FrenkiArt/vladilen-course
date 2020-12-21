@@ -27,6 +27,7 @@
   "homepage": "https://github.com/FrenkiArt/vladilen-course#readme",
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "babel-eslint": "^10.1.0",
