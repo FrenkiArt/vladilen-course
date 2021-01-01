@@ -15,11 +15,15 @@ function toCell() {
 /**
  * Функция создания колонок
  * @param {*} col Передаётся элемент который будет именем
+ * @param {string} resize Элемент для ресайза колонки
  * @return {string} Возвращает строку со сгенерированными
- * колонками
+ * колонками <div class="col-resize></div>
  */
 function toColumn(col) {
-  return `<div class="column">${col}</div>`;
+  return `<div class="column">
+            ${col}
+            <div class="col-resize"></div>
+          </div>`;
 }
 
 /**
@@ -31,9 +35,17 @@ function toColumn(col) {
  * строками
  */
 function createRow(index, content) {
+  let resizeElement = '';
+  if (index !== '') {
+    resizeElement = `<div class="row-resize"></div>`;
+  }
+
   return `
     <div class="row">
-      <div class="row-info">${index}</div>
+      <div class="row-info">
+        ${index}
+        ${resizeElement}
+      </div>
       <div class="row-data">${content}</div>
     </div>
   `;

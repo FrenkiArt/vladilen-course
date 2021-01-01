@@ -5,49 +5,51 @@ import {createTable} from './table.template';
  */
 export class Table extends ExcelComponent {
   static className = 'excel__table';
+
+  /**
+   * Конструктор для работы с элементами таблицы
+   * @param {*} $root Корневой элемент
+   * @param {*} options объект конфигурации
+   */
+  constructor($root, options) {
+    super($root, {
+      listeners: ['click', 'mousedown', 'mousemove', 'mouseup'],
+    });
+  }
+
   /**
    * @return {string} возвращает строку
    */
   toHTML() {
     return createTable();
+  }
 
-    /*
-    return `
-      <div class="row">
-        <div class="row-info"></div>
+  /**
+   * Событие клика
+   */
+  onClick() {
+    console.log('click');
+  }
 
-        <div class="row-data">
-          <div class="column">
-            A
-          </div>
-          <div class="column">
-            B
-          </div>
-          <div class="column">
-            C
-          </div>
-        </div>
-      </div>
+  /**
+   * Событие движения мышки
+   * @param {event} event - Само событие
+   */
+  onMousedown(event) {
+    console.log('mouseDown', event.target);
+  }
 
-      <div class="row">
-        <div class="row-info">1</div>
+  /**
+   * Событие движения мышкой
+   */
+  onMousemove() {
+    console.log('mouseMove');
+  }
 
-        <div class="row-data">
-          <div class="cell selected" contenteditable="true">a1</div>
-          <div class="cell" contenteditable="true">b1</div>
-          <div class="cell" contenteditable="true">c1</div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="row-info">2</div>
-
-        <div class="row-data">
-          <div class="cell" contenteditable="true">a2</div>
-          <div class="cell" contenteditable="true">b2</div>
-          <div class="cell" contenteditable="true">c2</div>
-        </div>
-      </div>
-    `;*/
+  /**
+   * Событие поднятия мышки
+   */
+  onMouseup() {
+    console.log('mouseUp');
   }
 }
