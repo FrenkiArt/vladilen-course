@@ -71,19 +71,20 @@
   .row-resize {
     background-color: $primary-color;
     opacity: 0;
-    transition: 0.1s;
+    transition: opacity 0.1s;
     position: absolute;
     bottom: 0;
     right: 0;
+    z-index: 100;
 
     &:hover {
-      opacity: 1;
+      opacity: 1 !important;
     }
   }
 
   .col-resize {
     top: 0;
-    width: 2px;
+    width: 4px;
 
     &:hover {
       cursor: col-resize;
