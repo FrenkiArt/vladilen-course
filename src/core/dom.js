@@ -77,9 +77,62 @@ class Dom {
 
     return this;
   }
+
+  /**
+   * Геттер для получения data аттрибута
+   */
+  get data() {
+    return this.$el.dataset;
+  }
+
+  /**
+   *
+   * @param {string} selector Передаётся селектор
+   * @return {*} элемент который найден выше по дереву
+   * по селектору
+   */
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  /**
+   * Метод для получения координат элемента
+   * @return {string} возвращает координаты элемента
+   */
+  getCoords() {
+    return this.$el.getBoundingClientRect();
+  }
+
+  /**
+   * @param {string} selector Передаётся селектор
+   * @return {*} Возвращается псевдомассив найденных элементов по селектору
+   */
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector);
+  }
+
+  /**
+   *
+   * @param {object} styles - Это объект конфигурации, в котором через его
+   * свойства передаются стили для элемента
+   */
+  css(styles = {}) {
+    /* for (const key in styles) {
+      if (Object.hasOwnProperty.call(styles, key)) {
+        const element = styles[key];
+        console.log(element);
+      }
+    } */
+
+    Object.keys(styles).forEach((key) => {
+      /* console.log(key);
+      console.log(styles[key]); */
+      this.$el.style[key] = styles[key];
+    });
+  }
 }
 
-$('div').html('<h1>TEEESSTTT</h1>').clear();
+// $('div').html('<h1>TEEESSTTT</h1>').clear();
 
 /**
  * функция на экспорт, которая возвращает new Dom()

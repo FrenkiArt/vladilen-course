@@ -5,21 +5,26 @@ const CODES = {
 
 /**
  * Функция создания ячеек
- * @return {string} Возвращает строку со сгенерированными
- * ячейками
+ * @return {string} Возвращает строку со сгенерированными ячейками
+ * @param {*} item Значение по умолчанию в map()
+ * @param {int} index Индекс передаваемый когда эту функцию используют в map()
  */
-function toCell() {
-  return `<div class="cell" contenteditable></div>`;
+function toCell(item, index) {
+  return `<div class="cell" contenteditable data-cell="${index}"></div>`;
 }
 
 /**
  * Функция создания колонок
  * @param {*} col Передаётся элемент который будет именем
+ * @param {int} index Индекс передаваемый когда эту функцию используют в map()
  * @return {string} Возвращает строку со сгенерированными
- * колонками
+ * колонками <div class="col-resize></div>
  */
-function toColumn(col) {
-  return `<div class="column">${col}</div>`;
+function toColumn(col, index) {
+  return `<div class="column" data-type="resizable" data-col="${index}">
+            ${col}
+            <div class="col-resize" data-resize="col"></div>
+          </div>`;
 }
 
 /**
@@ -31,9 +36,17 @@ function toColumn(col) {
  * строками
  */
 function createRow(index, content) {
+  let resizeElement = '';
+  if (index !== '') {
+    resizeElement = `<div class="row-resize" data-resize="row"></div>`;
+  }
+
   return `
-    <div class="row">
-      <div class="row-info">${index}</div>
+    <div class="row" data-type="resizable">
+      <div class="row-info">
+        ${index}
+        ${resizeElement}
+      </div>
       <div class="row-data">${content}</div>
     </div>
   `;
