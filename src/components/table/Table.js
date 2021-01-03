@@ -2,6 +2,7 @@ import {ExcelComponent} from '../../core/ExcelComponent';
 import {shouldResize} from './table.functions';
 import {resizeHandler} from './table.resize';
 import {createTable} from './table.template';
+import {TableSelection} from './TableSelection';
 
 /**
  *
@@ -28,10 +29,30 @@ export class Table extends ExcelComponent {
   }
 
   /**
+   * sdf
+   */
+  prepare() {
+    console.log('prepare ');
+    this.selection = new TableSelection();
+  }
+
+  /**
    * Событие клика
    */
   onClick() {
     console.log('click');
+  }
+
+  /**
+   * sdf
+   */
+  init() {
+    super.init();
+
+    console.log('init');
+
+    const $cell = this.$root.find('[data-id="A:1"]');
+    this.selection.select($cell);
   }
 
   /**

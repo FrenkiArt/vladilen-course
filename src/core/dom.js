@@ -49,6 +49,15 @@ class Dom {
   }
 
   /**
+   * sdf
+   * @param {*} selector
+   * @return {*} sdf
+   */
+  find(selector) {
+    return $(this.$el.querySelector(selector));
+  }
+
+  /**
    * @param {this.html} этот метод удаляет всё внутри элемента this
    * @return {this} возвращает this
    */
@@ -129,6 +138,22 @@ class Dom {
       console.log(styles[key]); */
       this.$el.style[key] = styles[key];
     });
+  }
+
+  /**
+   * sdf
+   * @param {*} className
+   */
+  addClass(className) {
+    this.$el.classList.add(className);
+  }
+
+  /**
+   * sdf
+   * @param {*} className
+   */
+  removeClass(className) {
+    this.$el.classList.remove(className);
   }
 }
 
