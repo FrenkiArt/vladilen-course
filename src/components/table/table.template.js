@@ -7,6 +7,7 @@ const CODES = {
  * Функция создания ячеек
  * @param {*} item Значение по умолчанию в map()
  * @param {int} index Индекс передаваемый когда эту функцию используют в map()
+ * change_to_row_number - В дальнейшем будет заменена на номер строки
  * @return {function} Возвращает строку со сгенерированными ячейками
  */
 function toCell(item, index) {
