@@ -1,5 +1,6 @@
+import {$} from '../../core/dom.js';
 import {ExcelComponent} from '../../core/ExcelComponent';
-import {shouldResize} from './table.functions';
+import {isCell, matrix, shouldResize} from './table.functions';
 import {resizeHandler} from './table.resize';
 import {createTable} from './table.template';
 import {TableSelection} from './TableSelection';
@@ -17,7 +18,7 @@ export class Table extends ExcelComponent {
    */
   constructor($root, options) {
     super($root, {
-      listeners: ['mousedown'],
+      listeners: ['mousedown', 'click'],
     });
   }
 
@@ -48,8 +49,7 @@ export class Table extends ExcelComponent {
    */
   init() {
     super.init();
-
-    console.log('init');
+    // console.log('init');
 
     const $cell = this.$root.find('[data-id="A:1"]');
     this.selection.select($cell);
@@ -62,6 +62,18 @@ export class Table extends ExcelComponent {
   onMousedown(event) {
     if (shouldResize(event)) {
       resizeHandler(this.$root, event);
+    } else if (isCell(event)) {
+      const $target = $(event.target);
+
+      if (event.shiftKey) {
+        // group
+        const $cells = matrix($target, this.selection.current).map((id) => {
+          return this.$root.find(`[data-id="${id}"]`);
+        });
+        this.selection.selectGroup($cells);
+      } else {
+        this.selection.select($target);
+      }
     }
   }
 

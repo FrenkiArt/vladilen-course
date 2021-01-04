@@ -142,6 +142,22 @@ class Dom {
 
   /**
    * sdf
+   * @param {*} parse sdf
+   * @return {*} sdf
+   */
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':');
+      return {
+        col: parsed[0],
+        row: +parsed[1], // '+' Приводит к int
+      };
+    }
+    return this.data.id;
+  }
+
+  /**
+   * sdf
    * @param {*} className
    */
   addClass(className) {
