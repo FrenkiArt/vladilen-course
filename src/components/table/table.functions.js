@@ -51,3 +51,47 @@ export function matrix($target, $current) {
     return acc;
   }, []);
 }
+
+/**
+ * Функция для нахождения следующей ячейки для выделения,
+ * после нажатия клавишь стрелок, ентера или таба.
+ * Так как я использую Буквы а не цифры для колонок, то их
+ * предварительно надо превратить в цифры используя .charCodeAt(),
+ * а после операция в конце обратно преобразовать в буквы используя
+ * String.fromCharCode().
+ * @param {string} key Какая клавиша была нажата
+ * @param {object} id объект с 2мя свойствами col и row
+ * @return {void} next selector
+ */
+export function nextSelector(key, {col, row}) {
+  col = col.charCodeAt();
+  const MIN_ROW_VALUE = 1;
+  const MIN_COL_VALUE = 65;
+
+  switch (key) {
+    case 'Enter':
+    case 'ArrowDown':
+      row++;
+      break;
+    case 'Tab':
+    case 'ArrowRight':
+      col++;
+      break;
+    case 'ArrowLeft':
+      if (col-- <= MIN_COL_VALUE) {
+        col = MIN_COL_VALUE;
+      } else {
+        col = col--;
+      }
+      break;
+    case 'ArrowUp':
+      if (row-- <= MIN_ROW_VALUE) {
+        row = MIN_ROW_VALUE;
+      } else {
+        row = row--;
+      }
+      break;
+  }
+  col = String.fromCharCode(col);
+  return `[data-id="${col}:${row}"]`;
+}
