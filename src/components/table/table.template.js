@@ -5,12 +5,22 @@ const CODES = {
 
 /**
  * Функция создания ячеек
- * @return {string} Возвращает строку со сгенерированными ячейками
  * @param {*} item Значение по умолчанию в map()
  * @param {int} index Индекс передаваемый когда эту функцию используют в map()
+ * change_to_row_number - В дальнейшем будет заменена на номер строки
+ * @return {function} Возвращает строку со сгенерированными ячейками
  */
 function toCell(item, index) {
-  return `<div class="cell" contenteditable data-cell="${index}"></div>`;
+  const letter = toChar(item, index);
+
+  return `<div 
+            class="cell" 
+            contenteditable 
+            spellcheck="false"
+            data-cell="${index}" 
+            data-type="cell"
+            data-id="${letter + ':change_to_row_number'}"
+          ></div>`;
 }
 
 /**
@@ -37,8 +47,10 @@ function toColumn(col, index) {
  */
 function createRow(index, content) {
   let resizeElement = '';
+
   if (index !== '') {
     resizeElement = `<div class="row-resize" data-resize="row"></div>`;
+    window.rowCurrentCount = index;
   }
 
   return `
@@ -74,14 +86,19 @@ export function createTable(rowsCount = 15) {
   const cols = new Array(colsCount).fill('').map(toChar).map(toColumn).join('');
   const cells = new Array(colsCount).fill('').map(toCell).join('');
 
-  // console.log(cols);
-
   // Создаём первую строчку, в которой будут буквы
   rows.push(createRow('', cols));
 
   // Создаём остальные строчки
   for (let i = 0; i < rowsCount; i++) {
-    rows.push(createRow(i + 1, cells));
+    const rowNumber = i + 1;
+
+    rows.push(
+      createRow(
+        rowNumber,
+        cells.replace(/change_to_row_number/g, rowNumber).trim()
+      )
+    );
   }
 
   return rows.join('');

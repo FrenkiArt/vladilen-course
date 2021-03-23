@@ -14,6 +14,33 @@ export class ExcelComponent extends DomListener {
   constructor($root, options = {}) {
     super($root, options.listeners);
     this.name = options.name || '';
+    this.emitter = options.emitter;
+    this.unsubscribers = [];
+    this.prepare();
+  }
+
+  /**
+   * Настраиваем наш компонент до init
+   */
+  prepare() {}
+
+  /**
+   * Уведомляем слушателей про события event
+   * @param {event} event Евент
+   * @param  {...any} args Вектор аргументов
+   */
+  $emit(event, ...args) {
+    this.emitter.emit(event, ...args);
+  }
+
+  /**
+   * Подписываемся на событие event
+   * @param {event} event Событие
+   * @param {function} fn Функция
+   */
+  $on(event, fn) {
+    const unsub = this.emitter.subscribe(event, fn);
+    this.unsubscribers.push(unsub);
   }
 
   /**
@@ -28,6 +55,8 @@ export class ExcelComponent extends DomListener {
 
   /**
    * Вызывает подключение слушателей
+   * Инициализируем компонент
+   * Добавляем дом слушателей
    */
   init() {
     this.initDOMListeners();
@@ -35,8 +64,11 @@ export class ExcelComponent extends DomListener {
 
   /**
    * Вызывает удаление слушателей
+   * Удаляем компонент
+   * Чистим слушателей
    */
   destroy() {
     this.removeDOMListeners();
+    this.unsubscribers.forEach((unsub) => unsub());
   }
 }

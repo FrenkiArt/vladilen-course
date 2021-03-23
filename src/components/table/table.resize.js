@@ -4,6 +4,7 @@ import {$} from '../../core/dom.js';
  * Функция ресайзХендлер
  * @param {*} $root
  * @param {*} event
+ * @return {void} void
  */
 export function resizeHandler($root, event) {
   const $resizer = $(event.target);
