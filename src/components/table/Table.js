@@ -1,6 +1,6 @@
 import {$} from '../../core/dom.js';
 import {ExcelComponent} from '../../core/ExcelComponent';
-import {isCell, matrix, shouldResize} from './table.functions';
+import {isCell, matrix, shouldResize, nextSelector} from './table.functions';
 import {resizeHandler} from './table.resize';
 import {createTable} from './table.template';
 import {TableSelection} from './TableSelection';
@@ -18,7 +18,9 @@ export class Table extends ExcelComponent {
    */
   constructor($root, options) {
     super($root, {
-      listeners: ['mousedown', 'click'],
+      name: 'Header',
+      listeners: ['mousedown', 'click', 'input', 'keydown'],
+      ...options,
     });
   }
 
@@ -39,9 +41,11 @@ export class Table extends ExcelComponent {
 
   /**
    * Событие клика
+   * @param {*} event event
    */
-  onClick() {
+  onClick(event) {
     console.log('click');
+    this.$emit('table:select', $(event.target));
   }
 
   /**
@@ -51,8 +55,25 @@ export class Table extends ExcelComponent {
     super.init();
     // console.log('init');
 
-    const $cell = this.$root.find('[data-id="A:1"]');
+    this.selectCell(this.$root.find('[data-id="A:1"]'));
+
+    this.$on('formula:input', (text) => {
+      this.selection.current.text(text);
+      console.log('Table from Formula', text);
+    });
+
+    this.$on('formula:done', () => {
+      this.selection.current.focus();
+    });
+  }
+
+  /**
+   * Укороченный вариант, чтобы много не дублироваться
+   * @param {string} $cell Ячейка
+   */
+  selectCell($cell) {
     this.selection.select($cell);
+    this.$emit('table:select', $cell);
   }
 
   /**
@@ -89,5 +110,38 @@ export class Table extends ExcelComponent {
    */
   onMouseup() {
     console.log('mouseUp');
+  }
+
+  /**
+   * Функция слушатель на нажатие клавишь
+   * @param {event} event Событие нажания клавиши
+   * @return {void}
+   */
+  onKeydown(event) {
+    const keys = [
+      'Enter',
+      'Tab',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowDown',
+      'ArrowUp',
+    ];
+
+    const {key} = event;
+
+    if (keys.includes(key) && !event.shiftKey) {
+      event.preventDefault();
+      const id = this.selection.current.id(true);
+      const $next = this.$root.find(nextSelector(key, id));
+      this.selectCell($next);
+    }
+  }
+
+  /**
+   * Обработка Инпут в таблице
+   * @param {event} event евент
+   */
+  onInput(event) {
+    this.$emit('table:input', $(event.target));
   }
 }

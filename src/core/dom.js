@@ -31,6 +31,25 @@ class Dom {
   }
 
   /**
+   * text() Функция для добавления текста
+   * @param {string} text Передаваемый текст
+   * @return {this} this или this.textContent
+   * в зависимости это геттер или сеттер
+   */
+  text(text) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text;
+      return this;
+    }
+
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim();
+    }
+
+    return this.$el.textContent.trim();
+  }
+
+  /**
    * Будущий аналог on() у JQuery
    * @param {*} eventType Это Эвент событие
    * @param {*} callback Это сама функция которая выполняется
@@ -157,19 +176,32 @@ class Dom {
   }
 
   /**
-   * sdf
-   * @param {*} className
+   * Делает фокус на элементе
+   * @return {this}
    */
-  addClass(className) {
-    this.$el.classList.add(className);
+  focus() {
+    this.$el.focus();
+    return this;
   }
 
   /**
    * sdf
    * @param {*} className
+   * @return {this}
+   */
+  addClass(className) {
+    this.$el.classList.add(className);
+    return this;
+  }
+
+  /**
+   * sdf
+   * @param {*} className
+   * @return {this}
    */
   removeClass(className) {
     this.$el.classList.remove(className);
+    return this;
   }
 }
 
