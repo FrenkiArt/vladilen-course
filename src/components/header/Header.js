@@ -4,6 +4,19 @@ import {ExcelComponent} from '../../core/ExcelComponent.js';
  */
 export class Header extends ExcelComponent {
   static className = 'excel__header';
+
+  /**
+   * sdf
+   * @param {*} $root Передаётся $root
+   * @param {*} options
+   */
+  constructor($root, options) {
+    super($root, {
+      name: 'Header',
+      ...options,
+    });
+  }
+
   /**
    * @return {string} возвращает строку
    */
